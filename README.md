@@ -1,42 +1,116 @@
-## ✨ Resumo das Funcionalidades
+#  Sistema de Criptografia Simétrica com Django
 
-* **Criptografia Simétrica (AES-128):** Utilização do algoritmo Fernet para cifrar (Plaintext para Base64) e decifrar dados com segurança de ponta a ponta na aplicação.
+Projeto acadêmico desenvolvido para a disciplina de Segurança da Informação, com foco na implementação de criptografia simétrica utilizando AES-128 através da biblioteca Fernet em uma aplicação web desenvolvida com Django.
 
-## 🛠️ Stack Tecnológica
+---
 
-* **Linguagem:** Python (3.14)
-* **Framework Web:** Django (6.0.5)
-* **Segurança e Criptografia:** Biblioteca `cryptography`
-* **Banco de Dados:** 
-* **Controle de Versão:** Git / GitHub
+# Objetivo do Projeto
 
-## 📁 Estrutura do Projeto
+O projeto tem como objetivo demonstrar conceitos fundamentais de segurança da informação aplicados em aplicações web modernas, incluindo:
 
-Abaixo está o mapa exato da arquitetura do projeto e a responsabilidade de cada diretório e arquivo:
+- Criptografia de dados
+- Proteção de credenciais
+- Comunicação segura
+- Auditoria e logs
+- Recuperação de senha
+- Segurança em banco de dados
+- Arquitetura segura de aplicações web
 
-```text
+---
+
+#  Funcionalidades Atuais
+
+-  Criptografia Simétrica utilizando AES-128
+-  Cifragem e decifragem de mensagens
+-  Armazenamento seguro de chave utilizando `.env`
+-  Interface web desenvolvida com Django
+-  Estrutura modularizada do sistema
+-  Organização de logs e segurança
+-  Integração com banco de dados SQLite
+
+---
+
+#  Stack Tecnológica
+
+| Tecnologia | Finalidade |
+|---|---|
+| Python 3 | Linguagem principal |
+| Django | Framework web |
+| Cryptography | Criptografia e segurança |
+| SQLite3 | Banco de dados |
+| Git/GitHub | Versionamento e colaboração |
+
+---
+
+#  Segurança Implementada
+
+O sistema utiliza criptografia simétrica baseada no algoritmo AES-128 por meio da biblioteca Fernet, garantindo:
+
+- Confidencialidade dos dados
+- Integridade das informações
+- Segurança no armazenamento de chaves
+- Proteção contra exposição de credenciais
+
+A chave criptográfica é armazenada localmente utilizando variáveis de ambiente (`.env`), evitando exposição no repositório GitHub.
+
+---
+
+# Estrutura do Projeto
+
+```bash
 TRABALHO/
+├── docs/                    #  Documentação técnico-científica
+│   └── README.md            #  Organização da documentação acadêmica
+│
 └── meu_site/
-    ├── core/                   # 🧠 Aplicação Principal (Lógica de negócios e visualização)
-    │   ├── __pycache__/        # ⚙️ Arquivos compilados em cache (Gerados automaticamente)
-    │   ├── templates/          # 🎨 Diretório de Front-end
-    │   │   └── cripto_teste.html # 📄 Interface visual onde o usuário vê a criptografia acontecer
-    │   ├── models.py           # 📊 Definição das tabelas e estruturação do banco de dados
-    │   └── views.py            # ⚙️ Camada de controle: processa requisições, chama o utils.py e envia ao HTML
+    ├── core/
+    │   ├── templates/
+    │   │   └── cripto_teste.html
+    │   ├── models.py
+    │   └── views.py
     │
-    ├── meu_site/               # 🛠️ Configurações Globais do Projeto Django
-    │   ├── __pycache__/        # ⚙️ Arquivos compilados em cache (Gerados automaticamente)
-    │   ├── __init__.py         # 📦 Arquivo em branco que sinaliza ao Python que isso é um pacote
-    │   ├── asgi.py             # 🌐 Ponto de entrada para servidores web assíncronos
-    │   ├── settings.py         # ⚙️ Coração do sistema: configurações de segurança, banco e apps instalados
-    │   ├── urls.py             # 🗺️ "GPS" do site: mapeia links (ex: /testar/) para as suas views
-    │   └── wsgi.py             # 🌐 Ponto de entrada para servidores web síncronos
+    ├── meu_site/
+    │   ├── settings.py
+    │   ├── urls.py
+    │   ├── asgi.py
+    │   └── wsgi.py
     │
-    ├── __pycache__/            # ⚙️ Arquivos compilados da raiz (Gerados automaticamente)
-    ├── .env                    # 🔒 SEGURANÇA: Armazena a chave AES localmente (Nunca vai para o GitHub)
-    ├── .gitignore              # 🛡️ Arquivo que instrui o Git a ignorar arquivos sensíveis (como o .env)
-    ├── db.sqlite3              # 🗄️ Banco de dados local (desenvolvimento)
-    ├── manage.py               # 🕹️ Ferramenta de linha de comando para interagir com o projeto
-    ├── utils.py                # 🔐 Motor central de Criptografia Simétrica (Lógica independente)
-    ├── venv/                   # 📦 Ambiente Virtual: guarda o Python e dependências de forma isolada
-    └── README.md               # 📖 Documentação principal do projeto (este arquivo)
+    ├── .env
+    ├── .gitignore
+    ├── db.sqlite3
+    ├── manage.py
+    ├── utils.py
+    ├── venv/
+    └── README.md
+```
+
+---
+
+#  Equipe do Projeto
+
+| Integrante | Responsabilidade |
+|---|---|
+| Vinicius Freitas | Autenticação, gestão de credenciais, auditoria e banco de dados |
+| Gustavo Muzel | Recuperação de senha, criptografia e comunicação segura |
+| Kaiky Sena Kroquevichy | Resumo científico, pôster científico e documentação técnico-científica |
+| Carlos Eduardo | Arquitetura do projeto, front-end, endpoints e Scrum Master |
+
+---
+
+#  Futuras Implementações
+
+- Sistema completo de autenticação
+- Logs avançados de auditoria
+- Criptografia aplicada ao banco de dados
+- Melhorias visuais na interface
+- Sistema de recuperação de senha
+- Endpoints protegidos
+- Controle de acesso por usuário
+
+---
+
+#  Disciplina
+
+Segurança da Informação
+
+Projeto desenvolvido para fins acadêmicos.
