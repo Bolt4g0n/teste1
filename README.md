@@ -59,41 +59,55 @@ A chave criptográfica é armazenada localmente utilizando variáveis de ambient
 
 ```bash
 TRABALHO/
-├── docs/                    #  Documentação técnico-científica
-│   └── README.md            #  Organização da documentação acadêmica
+├── docs/                                       #  Documentação técnico-científica do projeto
+│   ├── atas_reuniao/                           #  Atas e alinhamentos da equipe
+│   │   └── ata_18_05_2026.md                   #  Registro inicial de organização
+│   │
+│   ├── documentacao_tecnica/                   #  Documentação técnica do sistema
+│   │   └── README.md                           #  Informações técnicas
+│   │
+│   ├── imagens/                                #  Diagramas, prints e materiais visuais
+│   │   └── README.md                           #  Organização das imagens
+│   │
+│   ├── poster_cientifico/                      #  Desenvolvimento do pôster científico
+│   │   └── README.md                           #  Estrutura do pôster
+│   │
+│   ├── referencias/                            #  Referências bibliográficas
+│   │   ├── README.md                           #  Organização das referências
+│   │   └── referencias.md                      #  Referências utilizadas
+│   │
+│   ├── resumo_cientifico/                      #  Desenvolvimento do resumo científico
+│   │   ├── README.md                           #  Estrutura do resumo
+│   │   └── resumo.md                           #  Desenvolvimento do resumo científico
+│   │
+│   └── README.md                               #  Organização geral da documentação
 │
-└── meu_site/
-    ├── core/
-    │   ├── templates/
-    │   │   └── cripto_teste.html
-    │   ├── models.py
-    │   └── views.py
-    │
-    ├── meu_site/
-    │   ├── settings.py
-    │   ├── urls.py
-    │   ├── asgi.py
-    │   └── wsgi.py
-    │
-    ├── .env
-    ├── .gitignore
-    ├── db.sqlite3
-    ├── manage.py
-    ├── utils.py
-    ├── venv/
-    └── README.md
+├── meu_site/
+│   ├── __pycache__/                            #  Arquivos compilados automaticamente
+│   │
+│   ├── core/                                   #  Aplicação principal do sistema
+│   │   ├── templates/                          #  Templates HTML da aplicação
+│   │   │   └── cripto_teste.html               #  Interface de testes da criptografia
+│   │   │
+│   │   ├── models.py                           #  Modelagem do banco de dados
+│   │   └── views.py                            #  Controle das requisições
+│   │
+│   ├── meu_site/                               #  Configurações globais do Django
+│   │   ├── __pycache__/                        #  Cache interno do Python
+│   │   │
+│   │   ├── __init__.py                         #  Inicialização do pacote Python
+│   │   ├── asgi.py                             #  Configuração ASGI
+│   │   ├── settings.py                         #  Configurações do sistema
+│   │   ├── urls.py                             #  Rotas e endpoints da aplicação
+│   │   └── wsgi.py                             #  Configuração WSGI
+│   │
+│   ├── .gitignore                              #  Arquivos ignorados pelo Git
+│   ├── db.sqlite3                              #  Banco de dados SQLite local
+│   ├── manage.py                               #  Gerenciador principal do Django
+│   ├── utils.py                                #  Funções auxiliares de criptografia
+│   └── README.md                               #  Documentação principal do sistema
 ```
-
----
-
-#  Equipe do Projeto
-
-| Integrante | Responsabilidade |
-|---|---|
-| Vinicius Freitas | Autenticação, gestão de credenciais, auditoria e banco de dados |
-| Gustavo Muzel | Recuperação de senha, criptografia e comunicação segura |
-| Kaiky Sena Kroquevichy | Resumo científico, pôster científico e documentação técnico-científica |
-| Carlos Eduardo | Arquitetura do projeto, front-end, endpoints e Scrum Master |
+```
 
 ---
 
