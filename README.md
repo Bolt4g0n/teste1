@@ -34,11 +34,10 @@ O projeto tem como objetivo demonstrar conceitos fundamentais de segurança da i
 
 | Tecnologia | Finalidade |
 |---|---|
-| Python 3 | Linguagem principal |
-| Django | Framework web |
-| Cryptography | Criptografia e segurança |
-| SQLite3 | Banco de dados |
-| Git/GitHub | Versionamento e colaboração |
+| Python 3 | Linguagem principal | 3.14.3
+| Django | Framework web | 6.0.5
+| Cryptography | Criptografia e segurança | 48.0.0
+| Git/GitHub | Versionamento e colaboração | 2.54.0
 
 ---
 
