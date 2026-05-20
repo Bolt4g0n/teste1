@@ -18,15 +18,20 @@ O projeto tem como objetivo demonstrar conceitos fundamentais de segurança da i
 
 ---
 
-#  Funcionalidades Atuais
+# Funcionalidades Atuais
+Criptografia Simétrica (AES-128/Fernet): Motor independente para cifragem e decifragem de dados sensíveis em repouso.
 
--  Criptografia Simétrica utilizando AES-128
--  Cifragem e decifragem de mensagens
--  Armazenamento seguro de chave utilizando `.env`
--  Interface web desenvolvida com Django
--  Estrutura modularizada do sistema
--  Organização de logs e segurança
--  Integração com banco de dados SQLite
+Autenticação e Sessões Seguras: Sistema de login com validação de credenciais (PBKDF2 + Salt nativos), controle de rotas protegidas e invalidação completa de sessão durante o logout.
+
+Proteção contra Força Bruta (Rate Limit): Implementação de bloqueio automático de IP via django-axes para mitigar ataques automatizados de dicionário após múltiplas tentativas falhas.
+
+Auditoria e Logs de Segurança: Sistema assíncrono via Signals que registra silenciosamente eventos críticos (acessos bem-sucedidos, tentativas negadas e logouts), capturando o IP e o carimbo de tempo no arquivo isolado security.log.
+
+Isolamento de Segredos (Padrão 12-Factor App): Armazenamento de chaves críticas (APP_ENCRYPTION_KEY e SECRET_KEY) exclusivamente em variáveis de ambiente (.env), garantindo que não sejam expostas no código-fonte.
+
+Estrutura de Repositório Blindada: Arquivo .gitignore configurado para impedir o vazamento de logs de segurança, bancos de dados locais e variáveis de ambiente para a nuvem.
+
+Arquitetura MVT Modularizada: Separação clara de responsabilidades com lógica de criptografia em utils.py, ouvintes de eventos em signals.py e controle de requisições web através do framework Django.
 
 ---
 
@@ -57,54 +62,41 @@ A chave criptográfica é armazenada localmente utilizando variáveis de ambient
 # Estrutura do Projeto
 
 ```bash
-TRABALHO/
-├── docs/                                       #  Documentação técnico-científica do projeto
-│   ├── atas_reuniao/                           #  Atas e alinhamentos da equipe
-│   │   └── ata_18_05_2026.md                   #  Registro inicial de organização
-│   │
-│   ├── documentacao_tecnica/                   #  Documentação técnica do sistema
-│   │   └── README.md                           #  Informações técnicas
-│   │
-│   ├── imagens/                                #  Diagramas, prints e materiais visuais
-│   │   └── README.md                           #  Organização das imagens
-│   │
-│   ├── poster_cientifico/                      #  Desenvolvimento do pôster científico
-│   │   └── README.md                           #  Estrutura do pôster
-│   │
-│   ├── referencias/                            #  Referências bibliográficas
-│   │   ├── README.md                           #  Organização das referências
-│   │   └── referencias.md                      #  Referências utilizadas
-│   │
-│   ├── resumo_cientifico/                      #  Desenvolvimento do resumo científico
-│   │   ├── README.md                           #  Estrutura do resumo
-│   │   └── resumo.md                           #  Desenvolvimento do resumo científico
-│   │
-│   └── README.md                               #  Organização geral da documentação
+📦 TRABALHO (Raiz do Projeto)
+├── 📂 docs/                     # Documentação acadêmica e de engenharia do projeto
+│   ├── 📂 atas_reuniao/         # Registros dos encontros, decisões e progresso da equipe
+│   ├── 📂 documentacao_tecnica/ # Arquitetura e justificativas de segurança (Criptografia, LGPD, etc.)
+│   ├── 📂 imagens/              # Diagramas e capturas de tela do sistema em funcionamento
+│   ├── 📂 poster_cientifico/    # Material visual de apoio para a apresentação final
+│   ├── 📂 referencias/          # Base teórica, artigos e normas (OWASP, NIST) utilizados
+│   ├── 📂 resumo_cientifico/    # Abstract e visão geral acadêmica do projeto
+│   └── 📄 README.md             # Guia de leitura exclusivo da pasta de documentação
 │
-├── meu_site/
-│   ├── __pycache__/                            #  Arquivos compilados automaticamente
+├── 📂 meu_site/                 # Diretório principal do sistema web (Backend em Django)
+│   ├── 📂 core/                 # Aplicativo central (Regras de negócio e interfaces)
+│   │   ├── 📂 templates/core/   # Telas do sistema (Front-end em HTML)
+│   │   │   └── 📄 login.html    # Interface de autenticação de usuários
+│   │   ├── 📄 apps.py           # Configuração do app e gatilho de inicialização dos logs
+│   │   ├── 📄 models.py         # Estrutura e tabelas do banco de dados
+│   │   ├── 📄 signals.py        # "Espiões" invisíveis que registram logins, falhas e logouts
+│   │   └── 📄 views.py          # Controladores que validam acessos e direcionam as telas
 │   │
-│   ├── core/                                   #  Aplicação principal do sistema
-│   │   ├── templates/                          #  Templates HTML da aplicação
-│   │   │   └── cripto_teste.html               #  Interface de testes da criptografia
-│   │   │
-│   │   ├── models.py                           #  Modelagem do banco de dados
-│   │   └── views.py                            #  Controle das requisições
+│   ├── 📂 meu_site/             # Painel de Controle global do framework Django
+│   │   ├── 📄 __init__.py       # Arquivo em branco que indica que a pasta é um módulo Python
+│   │   ├── 📄 asgi.py           # Configuração para comunicação de servidores assíncronos
+│   │   ├── 📄 settings.py       # Configurações globais (Segurança, Banco, Sessões e HTTPS)
+│   │   ├── 📄 urls.py           # Mapa central de rotas e links do site (ex: /login, /home)
+│   │   └── 📄 wsgi.py           # Tradutor padrão para colocar o site no ar em servidores de produção
 │   │
-│   ├── meu_site/                               #  Configurações globais do Django
-│   │   ├── __pycache__/                        #  Cache interno do Python
-│   │   │
-│   │   ├── __init__.py                         #  Inicialização do pacote Python
-│   │   ├── asgi.py                             #  Configuração ASGI
-│   │   ├── settings.py                         #  Configurações do sistema
-│   │   ├── urls.py                             #  Rotas e endpoints da aplicação
-│   │   └── wsgi.py                             #  Configuração WSGI
-│   │
-│   ├── .gitignore                              #  Arquivos ignorados pelo Git
-│   ├── db.sqlite3                              #  Banco de dados SQLite local
-│   ├── manage.py                               #  Gerenciador principal do Django
-│   ├── utils.py                                #  Funções auxiliares de criptografia
-│   └── README.md                               #  Documentação principal do sistema
+│   ├── 📄 .env                  # Guarda chaves secretas. 
+│   ├── 📄 .gitignore            # Filtro de segurança: bloqueia o envio de senhas e logs para a nuvem
+│   ├── 🗄️ db.sqlite3            # Banco de dados local (armazena os hashes PBKDF2 dos usuários)
+│   ├── ⚙️ manage.py             # Ferramenta principal de terminal para executar comandos no servidor
+│   ├── 📄 security.log          # Registro de auditoria isolado (quem logou, IPs, falhas)
+│   └── 📄 utils.py              # Serviço independente de criptografia (Motor de cifragem AES/Fernet)
+│
+├── 📂 venv/                     # Ambiente virtual (isla as bibliotecas do projeto do resto do computador)
+└── 📄 README.md                 # Manual principal com instruções de instalação, execução e tecnologias
 ```
 ```
 
