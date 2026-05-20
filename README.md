@@ -37,7 +37,7 @@ Arquitetura MVT Modularizada: Separação clara de responsabilidades com lógica
 
 #  Stack Tecnológica
 
-| Tecnologia | Finalidade |
+| Tecnologia | Versão |
 |---|---|
 | Python 3 | 3.14.3 |
 | Django | 6.0.5 |
