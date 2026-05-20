@@ -100,6 +100,37 @@ A chave criptográfica é armazenada localmente utilizando variáveis de ambient
 └── 📄 README.md                 # Manual principal com instruções de instalação, execução e tecnologias
 ```
 ```
+---
+
+
+🚀 Guia Rápido de Execução (Windows)
+ 
+Siga os passos abaixo no seu terminal (PowerShell ou CMD) para rodar o projeto localmente:
+ 
+1. Ative o ambiente virtual
+ 
+Na pasta raiz do projeto, ative o isolamento das bibliotecas para que o Python reconheça as dependências:
+ 
+.\venv\Scripts\activate
+ 
+2. Acesse a pasta da aplicação
+Navegue para dentro do diretório principal onde está o arquivo de gerenciamento do Django:
+ 
+cd meu_site
+ 
+3. Ligue o servidor local
+Inicie a aplicação com o comando padrão:
+ 
+python manage.py runserver
+ 
+4. Acesse o sistema
+ 
+Com o servidor rodando, abra o seu navegador e acesse a rota da nossa tela de autenticação:
+ 
+👉 http://127.0.0.1:8000/login/
+ 
+(Nota: Para encerrar o servidor no terminal quando terminar de testar, basta pressionar Ctrl + C).
+
 
 ---
 
