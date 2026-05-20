@@ -39,10 +39,10 @@ Arquitetura MVT Modularizada: Separação clara de responsabilidades com lógica
 
 | Tecnologia | Finalidade |
 |---|---|
-| Python 3 | Linguagem principal | 3.14.3 |
-| Django | Framework web | 6.0.5 |
-| Cryptography | Criptografia e segurança | 48.0.0 |
-| Git/GitHub | Versionamento e colaboração | 2.54.0 |
+| Python 3 | 3.14.3 |
+| Django | 6.0.5 |
+| Cryptography | 48.0.0 |
+| Git/GitHub | 2.54.0 |
 
 
 ---
