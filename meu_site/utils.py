@@ -5,7 +5,7 @@ from cryptography.fernet import Fernet
 ENCRYPTION_KEY = os.environ.get('APP_ENCRYPTION_KEY')
 
 if not ENCRYPTION_KEY:
-    # Para desenvolvimento, você pode gerar uma temporária, 
+    # pode gerar uma temporária, 
     # mas em produção DEVE vir do ambiente.
     raise ValueError("A variável APP_ENCRYPTION_KEY não foi configurada.")
 

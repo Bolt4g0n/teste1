@@ -109,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'UTC'
 
@@ -122,7 +122,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
-
+# --- BLOCO DE COMUNICAÇÃO SEGURA (TLS/HTTPS) ---
 SECURE_SSL_REDIRECT = False  # Força o redirecionamento para HTTPS
 SESSION_COOKIE_SECURE = True  # Garante que cookies de sessão usem HTTPS
 CSRF_COOKIE_SECURE = True  # Garante que cookies CSRF usem HTTPS
