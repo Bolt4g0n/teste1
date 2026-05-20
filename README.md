@@ -151,3 +151,10 @@ Com o servidor rodando, abra o seu navegador e acesse a rota da nossa tela de au
 Segurança da Informação
 
 Projeto desenvolvido para fins acadêmicos.
+
+# Colaboradores
+
+KAIKY SENA KROQUEVICHY - 11231102733 
+CARLOS EDUARDO LOURANÇO PEREIRA - 11231102525 
+GUSTAVO MUZEL DE CARVALHO - 11231102563 
+VINICIUS FREITAS DE SANTANA - 11231103599 
