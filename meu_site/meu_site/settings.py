@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core',  
+    'core.apps.CoreConfig',  # Nossa aplicação principal    
+    'axes',  
 ]
 
 MIDDLEWARE = [
@@ -54,6 +55,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'axes.middleware.AxesMiddleware',
 ]
 
 ROOT_URLCONF = 'meu_site.urls'
@@ -130,3 +133,56 @@ SECURE_HSTS_SECONDS = 0  # Ativa o HSTS
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 SECURE_CONTENT_TYPE_NOSNIFF = True # Bloqueia sniffing de conteúdo
+
+# 8. PROTEÇÃO BRUTE FORCE (DJANGO-AXES)
+# Avisa o Django para usar o Axes junto com o sistema de login padrão
+AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesStandaloneBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+# Quantas vezes o usuário pode errar a senha antes do bloqueio?
+AXES_FAILURE_LIMIT = 5 
+
+# Tempo de bloqueio do IP (em horas). 1 = Uma hora de gancho.
+AXES_COOLOFF_TIME = 1 
+
+# Se o usuário acertar a senha antes do limite, o contador zera? (True = Sim)
+AXES_RESET_ON_SUCCESS = True 
+
+# Bloquear apenas o login por nome de usuário (False) ou bloquear o IP do atacante (True)?
+AXES_LOCK_OUT_BY_COMBINATION_USER_AND_IP = True
+
+#9 LOGS E SEGURANÇA
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'padrao_seguranca' : {
+            'format': '[{asctime}] {levelname} | IP: {ip} | {message}',
+            'style': '{',   
+        },
+    },
+'filters': {
+    # Filtro para adicionar o IP do cliente aos logs
+    'require_debug_true': {
+        '()': 'django.utils.log.RequireDebugTrue',
+    },
+},
+'handlers': {
+        'arquivo_log': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'security.log',
+            'formatter': 'padrao_seguranca',
+        },
+    },
+    'loggers': {
+        'core.seguranca': {
+            'handlers': ['arquivo_log'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+
+}
