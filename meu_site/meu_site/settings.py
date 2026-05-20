@@ -11,6 +11,12 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+# Carrega as variáveis do arquivo .env para a memória
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&x=d^rmv(d=ja#-m-z9d3$)5rth@!&xh)f9m*v(1dohrdr2nr2'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core',  # Adiciona o app 'core' à lista de apps instalados
+    'core.apps.CoreConfig',  # Nossa aplicação principal    
+    'axes',  
 ]
 
 MIDDLEWARE = [
@@ -48,6 +55,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'axes.middleware.AxesMiddleware',
 ]
 
 ROOT_URLCONF = 'meu_site.urls'
@@ -103,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'UTC'
 
@@ -116,7 +125,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
-
+# --- BLOCO DE COMUNICAÇÃO SEGURA (TLS/HTTPS) ---
 SECURE_SSL_REDIRECT = False  # Força o redirecionamento para HTTPS
 SESSION_COOKIE_SECURE = True  # Garante que cookies de sessão usem HTTPS
 CSRF_COOKIE_SECURE = True  # Garante que cookies CSRF usem HTTPS
@@ -124,3 +133,56 @@ SECURE_HSTS_SECONDS = 0  # Ativa o HSTS
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 SECURE_CONTENT_TYPE_NOSNIFF = True # Bloqueia sniffing de conteúdo
+
+# 8. PROTEÇÃO BRUTE FORCE (DJANGO-AXES)
+# Avisa o Django para usar o Axes junto com o sistema de login padrão
+AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesStandaloneBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+# Quantas vezes o usuário pode errar a senha antes do bloqueio?
+AXES_FAILURE_LIMIT = 5 
+
+# Tempo de bloqueio do IP (em horas). 1 = Uma hora de gancho.
+AXES_COOLOFF_TIME = 1 
+
+# Se o usuário acertar a senha antes do limite, o contador zera? (True = Sim)
+AXES_RESET_ON_SUCCESS = True 
+
+# Bloquear apenas o login por nome de usuário (False) ou bloquear o IP do atacante (True)?
+AXES_LOCK_OUT_BY_COMBINATION_USER_AND_IP = True
+
+#9 LOGS E SEGURANÇA
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'padrao_seguranca' : {
+            'format': '[{asctime}] {levelname} | IP: {ip} | {message}',
+            'style': '{',   
+        },
+    },
+'filters': {
+    # Filtro para adicionar o IP do cliente aos logs
+    'require_debug_true': {
+        '()': 'django.utils.log.RequireDebugTrue',
+    },
+},
+'handlers': {
+        'arquivo_log': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'security.log',
+            'formatter': 'padrao_seguranca',
+        },
+    },
+    'loggers': {
+        'core.seguranca': {
+            'handlers': ['arquivo_log'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+
+}

@@ -1,11 +1,8 @@
-"""
-URL configuration for meu_site project.
-"""
 from django.contrib import admin
 from django.urls import path
-from core import views  #  '.' para 'core' para apontar para a pasta certa!
+from core.views import tela_login # Importe a sua view aqui
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('testar/', views.testar_seguranca, name='testar_seguranca'),
+    path('login/', tela_login, name='login'), # Esta é a nova rota!
 ]
