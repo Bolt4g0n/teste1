@@ -43,7 +43,7 @@ Arquitetura MVT Modularizada: Separação clara de responsabilidades com lógica
 | Django | Framework web | 6.0.5 |
 | Cryptography | Criptografia e segurança | 48.0.0 |
 | Git/GitHub | Versionamento e colaboração | 2.54.0 |
->>>>>>> a400e556037ac4eef007dbb140616cb8a7168961
+
 
 ---
 
