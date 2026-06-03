@@ -151,7 +151,7 @@ AXES_COOLOFF_TIME = 1
 AXES_RESET_ON_SUCCESS = True 
 
 # Bloquear apenas o login por nome de usuário (False) ou bloquear o IP do atacante (True)?
-AXES_LOCK_OUT_BY_COMBINATION_USER_AND_IP = True
+AXES_LOCKOUT_PARAMETERS = [["username", "ip_address"]]
 
 #9 LOGS E SEGURANÇA
 LOGGING = {

@@ -1,8 +1,13 @@
-from django.contrib import admin
 from django.urls import path
-from core.views import tela_login # Importe a sua view aqui
+from core import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('login/', tela_login, name='login'), # Esta é a nova rota!
+    # Rota raiz (Home Page) protegida
+    path('', views.home, name='home'),
+    
+    # Rota do formulário de autenticação
+    path('login/', views.tela_login, name='tela_login'),
+    
+    # Rota para destruição de sessão
+    path('logout/', views.fazer_logout, name='logout'),
 ]

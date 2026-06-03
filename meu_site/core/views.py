@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 def tela_login(request):
     # Se o usuário já estiver logado, manda ele direto para a home
@@ -16,7 +17,7 @@ def tela_login(request):
             # Se a senha estiver certa, o login() cria a sessão criptografada
             user = form.get_user()
             login(request, user)
-            return redirect('home') # Substitua 'home' pelo nome da sua tela principal
+            return redirect('home')
         else:
             # Se errar a senha (ou se o Axes bloquear), envia uma mensagem de erro
             messages.error(request, "Usuário ou senha inválidos. Verifique suas credenciais.")
@@ -25,3 +26,15 @@ def tela_login(request):
         form = AuthenticationForm()
 
     return render(request, 'core/login.html', {'form': form})
+
+
+# O decorator garante que apenas usuários autenticados acessem esta View
+@login_required(login_url='/login/')
+def home(request):
+    return render(request, 'core/home.html')
+
+
+# Função que destrói a sessão do usuário e limpa os cookies de acesso
+def fazer_logout(request):
+    logout(request)
+    return redirect('tela_login')

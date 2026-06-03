@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Restrito | Sistema Seguro</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f4f4f9; padding: 50px;">
+
+    <div style="max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        <h1 style="color: #2c3e50;">🛡️ Ambiente Restrito</h1>
+        
+        <p>Bem-vindo(a), <strong>{{ request.user.username }}</strong>!</p>
+        <p>Sua autenticação foi validada e seu acesso registrado nos logs do sistema.</p>
+
+        <hr style="margin: 20px 0; border: 1px solid #eee;">
+
+        <a href="{% url 'logout' %}" style="display: inline-block; padding: 10px 20px; background-color: #e74c3c; color: white; text-decoration: none; border-radius: 5px;">
+            Sair do Sistema
+        </a>
+    </div>
+
+</body>
+</html>
