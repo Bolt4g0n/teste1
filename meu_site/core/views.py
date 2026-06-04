@@ -49,14 +49,17 @@ def fazer_logout(request):
 def home(request):
     return render(request, 'core/home.html')
 
-@login_required(login_url='/login/')
+
+# --- VIEW LIVRE (CRIAÇÃO DE USUÁRIO) ---
+# Tiramos o @login_required daqui de cima para permitir cadastro aberto!
+
 def criar_usuario(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save() # Salva com hash PBKDF2 e Salt automaticamente
-            messages.success(request, "Novo usuário criado com sucesso!")
-            return redirect('home')
+            messages.success(request, "Novo usuário criado com sucesso! Faça seu login.")
+            return redirect('tela_login') # Agora redireciona para o login em vez da home
         else:
             messages.error(request, "Erro ao criar usuário. Verifique os dados.")
     else:
