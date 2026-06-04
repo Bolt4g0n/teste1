@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Novo Usuário | Sistema Seguro</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f4f4f9; padding: 50px;">
+
+    <div style="max-width: 500px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        <h2 style="color: #2c3e50;">➕ Cadastrar Novo Acesso</h2>
+        <p style="color: #666; font-size: 14px;">As senhas criadas aqui serão armazenadas usando hash criptográfico seguro (PBKDF2).</p>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div style="padding: 10px; margin-bottom: 15px; background-color: {% if message.tags == 'error' %}#f8d7da{% else %}#d4edda{% endif %}; color: {% if message.tags == 'error' %}#721c24{% else %}#155724{% endif %}; border-radius: 4px;">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div style="margin-bottom: 20px;">
+                {{ form.as_p }}
+            </div>
+
+            <button type="submit" style="padding: 10px 20px; background-color: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; width: 100%; font-size: 16px;">
+                Salvar Usuário
+            </button>
+        </form>
+
+        <hr style="margin: 20px 0; border: 1px solid #eee;">
+
+        <a href="{% url 'home' %}" style="display: block; text-align: center; color: #3498db; text-decoration: none;">
+            ← Voltar para o Painel
+        </a>
+    </div>
+
+</body>
+</html>
