@@ -37,12 +37,13 @@ Arquitetura MVT Modularizada: Separação clara de responsabilidades com lógica
 
 #  Stack Tecnológica
 
-| Tecnologia | Finalidade |
+| Tecnologia | Versão |
 |---|---|
-| Python 3 | Linguagem principal | 3.14.3 |
-| Django | Framework web | 6.0.5 |
-| Cryptography | Criptografia e segurança | 48.0.0 |
-| Git/GitHub | Versionamento e colaboração | 2.54.0 |
+| Python 3 | 3.14.3 |
+| Django | 6.0.5 |
+| Cryptography | 48.0.0 |
+| Git/GitHub | 2.54.0 |
+
 
 ---
 
@@ -99,6 +100,37 @@ A chave criptográfica é armazenada localmente utilizando variáveis de ambient
 └── 📄 README.md                 # Manual principal com instruções de instalação, execução e tecnologias
 ```
 ```
+---
+
+
+🚀 Guia Rápido de Execução (Windows)
+ 
+Siga os passos abaixo no seu terminal (PowerShell ou CMD) para rodar o projeto localmente:
+ 
+1. Ative o ambiente virtual
+ 
+Na pasta raiz do projeto, ative o isolamento das bibliotecas para que o Python reconheça as dependências:
+ 
+.\venv\Scripts\activate
+ 
+2. Acesse a pasta da aplicação
+Navegue para dentro do diretório principal onde está o arquivo de gerenciamento do Django:
+ 
+cd meu_site
+ 
+3. Ligue o servidor local
+Inicie a aplicação com o comando padrão:
+ 
+python manage.py runserver
+ 
+4. Acesse o sistema
+ 
+Com o servidor rodando, abra o seu navegador e acesse a rota da nossa tela de autenticação:
+ 
+👉 http://127.0.0.1:8000/login/
+ 
+(Nota: Para encerrar o servidor no terminal quando terminar de testar, basta pressionar Ctrl + C).
+
 
 ---
 
@@ -119,3 +151,10 @@ A chave criptográfica é armazenada localmente utilizando variáveis de ambient
 Segurança da Informação
 
 Projeto desenvolvido para fins acadêmicos.
+
+# Colaboradores
+
+KAIKY SENA KROQUEVICHY - 11231102733 
+CARLOS EDUARDO LOURANÇO PEREIRA - 11231102525 
+GUSTAVO MUZEL DE CARVALHO - 11231102563 
+VINICIUS FREITAS DE SANTANA - 11231103599 
